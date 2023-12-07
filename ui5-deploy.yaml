@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=https://sap.github.io/ui5-tooling/schema/ui5.yaml.json
+
+specVersion: "3.1"
+metadata:
+  name: oup.ptp.pod.asn
+type: application
+builder:
+  resources:
+    excludes:
+      - /test/**
+      - /localService/**
+  customTasks:
+    - name: deploy-to-abap
+      afterTask: generateCachebusterInfo
+      configuration:
+        target:
+          destination: S4D110
+          client: 110
+          auth: basic
+        credentials:
+          username: env:110_USER
+          password: env:110_PASSWORD
+        app:
+          name: Z_PTP_POD_ASN
+          description: POD Advance Shipping Notification
+          package: ZPTP
+          transport: S4DK922661
+        exclude:
+          - /test/
